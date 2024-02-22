@@ -38,6 +38,7 @@ const VideoLandingPage: React.FC = () => {
 
   return (
     <div className="container">
+      <p className="text-xs"><i>For entertainment purposes only.</i></p>
       <div className="ad-banner-horizontal">
         {/* Display the randomly selected ad banner */}
         <img src={randomAdImage} alt="Advertisement" />

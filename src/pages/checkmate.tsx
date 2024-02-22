@@ -96,7 +96,7 @@ const AirdropChecker = () => {
               onClick={handleRefresh}
               disabled={refreshing} // Disable the button while refreshing
             >
-              {refreshing ? 'Refreshing...' : '↻'}
+              {refreshing ? 'Refreshing...' : ''}
             </button>
           </div>
         </div>

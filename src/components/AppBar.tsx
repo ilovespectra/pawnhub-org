@@ -28,6 +28,9 @@ export const AppBar: FC = props => {
         {/* Nav Links */}
         <div className="hidden md:inline md:navbar-center">
           <div className="flex items-stretch">
+          <Link href="/">
+              <a className="btn btn-ghost btn-sm rounded-btn">Home</a>
+            </Link>
           <Link href="/about">
               <a className="btn btn-ghost btn-sm rounded-btn">About</a>
             </Link>
