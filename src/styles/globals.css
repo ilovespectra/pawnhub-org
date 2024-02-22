@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset styles */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+/* Global link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 10vh;
+}
+
+/* Coming soon button styles */
+.bg-purple-800 {
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .bg-purple-800 {
+    border-radius: 5vw;
+    padding: 2vw;
+    font-size: 3vw;
+  }
+}
+
+/* Input field styles */
+.bg-gray-800 {
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Check button styles */
+.custom-button {
+  flex-shrink: 0;
+}
+
+/* Logo styles */
+.logo-mobile {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 480px) {
+  .logo-mobile {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* About box styles */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.about-box {
+  background-color: rgb(101, 32, 141);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: calc(50% - 20px);
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 4px solid rgb(40, 13, 52);
+}
+
+.about-box2 {
+  background-color: rgb(101, 32, 141);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: calc(70% - 20px);
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 4px solid rgb(40, 13, 52);
+}
+
+.about-box:nth-child(odd) {
+  margin-right: 20px;
+}
+
+.about-box h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.about-box p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 800px) {
+  .about-box2 {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-box {
+    width: 100%;
+    margin-right: 10px;
+    margin-left: 10px; 
+  }
+
+  .about-box:nth-child(odd) {
+    margin-right: 0;
+  }
+}
+
+/* Video container styles */
+.vid-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Video grid styles */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.video-item {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.video-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-title {
+  font-size: 20px; /* Set the font size to make the title larger */
+  font-weight: bold; /* Set the font weight to make the title bolder */
+  margin-top: 15px; /* Add margin to the top of the title */
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  color: grey;
+}
+
+.metadata > div {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.metadata > div span {
+  margin-left: 5px;
+}
+
+/* Video player styles */
+.mainvid-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.video-container {
+  display: flex;
+  width: 80%;
+}
+
+.sidebar-right {
+  width: 10%;
+  margin-left: 15px;
+}
+
+.sidebar-left {
+  width: 10%;
+  margin-right: 15px;
+}
+
+@media (max-width: 700px) {
+  .sidebar-left, .sidebar-right {
+    display: none;
+  }
+}
+
+.video-player-wrapper {
+  width: 80%;
+  margin-top: 20px;
+}
+
+.video-player {
+  position: relative;
+}
+
+.video-player video {
+  width: 100%;
+}
+
+.video-player h2 {
+  font-size: 24px; /* Set the font size to make the title larger */
+  font-weight: bold; /* Set the font weight to make the title bolder */
+  margin-top: 15px; /* Add margin to the top of the title */
+}
+
+.video-description {
+  margin-top: 30px;
+}
+
+/* Comments section styles */
+.comments-section {
+  width: 100%;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #0e0816;
+  border-radius: 10px;
+}
+
+.comments-section h3 {
+  margin-top: 15px;
+  margin-bottom: 15px; 
+  font-weight: 800;
+}
+
+.comments-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comments-section li {
+  margin-bottom: 15px;
+}
+
+.comments-section strong {
+  font-weight: bold;
+  color: #6900da;
+}
+
+/* Ad banner styles */
+.ad-banner-horizontal {
+  width: 80%;
+  max-width: 1200px;
+  margin-bottom: 50px;
+}
+
+.ad-banner-horizontal img {
+  width: 100%;
+}
