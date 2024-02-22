@@ -7,7 +7,7 @@ interface VideoParams {
 }
 
 const VideoPage: React.FC = () => {
-  const { id } = useParams<VideoParams>();
+  const { id } = useParams<{ id: string }>(); 
 
   // Fetch video data based on the ID
   // For demonstration purposes, let's assume you have video data available locally
