@@ -14,7 +14,7 @@ const VideoPage: React.FC = () => {
   const videoData = {
     id: id,
     title: 'Pool Boi',
-    videoUrl: `/video1.mp4`, // Assuming your video files are named like video1.mp4, video2.mp4, etc.
+    videoUrl: `/video9.mp4`, // Assuming your video files are named like video1.mp4, video2.mp4, etc.
     description: 'Pawn Boi is about to become your new favorite Pool Boi. Native Kamino rewards for PAWN/SOL liquidity providers, who earn moar PAWN/SOL k-tokens which auto-compound to their position, raising the waterline and their rewards.',
   };
 
