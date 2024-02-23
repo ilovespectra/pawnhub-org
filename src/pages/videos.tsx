@@ -40,7 +40,9 @@ const VideoLandingPage: React.FC = () => {
     <div className="container">
       <div className="ad-banner-horizontal">
         {/* Display the randomly selected ad banner */}
+        <a href="https://birdeye.so/token/PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc?chain=solana">
         <img src={randomAdImage} alt="Advertisement" />
+        </a>
       </div>
       <div className="video-grid">
         {videos.map((video) => (

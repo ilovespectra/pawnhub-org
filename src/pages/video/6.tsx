@@ -23,7 +23,9 @@ const VideoPage: React.FC = () => {
       <div className="video-container">
         <div className="sidebar-left">
           {/* Your ads or sidebar content on the left */}
+          <a href="https://birdeye.so/token/PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc?chain=solana" target="_blank" rel="noopener noreferrer">
           <img src="/ad14.png" alt="Advertisement" />
+          </a>
         </div>
         <div className="video-player-wrapper">
         
@@ -42,7 +44,9 @@ const VideoPage: React.FC = () => {
         </div>
         <div className="sidebar-right">
   {/* Your ads or sidebar content on the right */}
+  <a href="https://birdeye.so/token/PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc?chain=solana" target="_blank" rel="noopener noreferrer">
   <img src="/ad2.png" alt="Advertisement"/>
+  </a>
 </div>
 </div>
     </div>
