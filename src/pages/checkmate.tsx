@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const AirdropChecker = () => {
   const [manualWalletAddress, setManualWalletAddress] = useState('');
   const [manualAllocation, setManualAllocation] = useState('');
-  const [walletsList, setWalletsList] = useState({});
+  const [walletsList, setWalletsList] = useState([]);
   const { publicKey } = useWallet();
   const router = useRouter();
 
@@ -27,12 +27,10 @@ const AirdropChecker = () => {
   }, []);
 
   const connectedAllocation = useMemo(() => {
-    if (!publicKey || !walletsList || !walletsList.hasOwnProperty) return '';
+    if (!publicKey || !walletsList || walletsList.length === 0) return '';
     const walletAddress = publicKey.toBase58();
-    if (walletsList.hasOwnProperty(walletAddress)) {
-      return Number(walletsList[walletAddress]).toLocaleString();
-    }
-    return '';
+    const connectedWallet = walletsList.find(wallet => wallet.address === walletAddress);
+    return connectedWallet ? Number(connectedWallet.value).toLocaleString() : '';
   }, [publicKey, walletsList]);
 
   const handleRefresh = () => {
@@ -41,8 +39,9 @@ const AirdropChecker = () => {
   };
 
   const handleCheckAllocation = () => {
-    if (walletsList && walletsList.hasOwnProperty && walletsList.hasOwnProperty(manualWalletAddress)) {
-      const formattedAllocation = Number(walletsList[manualWalletAddress]).toLocaleString();
+    const queriedWallet = walletsList.find(wallet => wallet.address === manualWalletAddress);
+    if (queriedWallet) {
+      const formattedAllocation = Number(queriedWallet.value).toLocaleString();
       setManualAllocation(formattedAllocation);
     } else {
       setManualAllocation('no');
