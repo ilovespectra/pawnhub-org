@@ -134,6 +134,7 @@ a {
   padding: 20px;
 }
 
+
 /* Video grid styles */
 .video-grid {
   display: grid;
@@ -201,10 +202,19 @@ a {
   justify-content: center;
   margin-top: 20px;
 }
-
 .video-container {
   display: flex;
-  width: 80%;
+  width: 80%; /* Set the initial width of the video container */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Adjust the width of the video container for smaller screens */
+@media (max-width: 700px) {
+  .video-container {
+    width: 100%; /* Set the width to 100% when sidebar ad banners are hidden */
+    padding: 0px;
+  }
 }
 
 .sidebar-right {
