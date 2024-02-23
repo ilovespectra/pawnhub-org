@@ -63,12 +63,12 @@ const AirdropChecker = () => {
               </div>
             )}
             {/* Add the circular refresh button */}
-            <button
+            {/* <button
               className="refresh-button"
               onClick={handleRefresh}
             >
               Refresh
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="flex items-center space-x-4">
