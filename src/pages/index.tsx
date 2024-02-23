@@ -38,7 +38,7 @@ const VideoLandingPage: React.FC = () => {
 
   return (
     <div className="container">
-      <p className="text-xs"><i>For entertainment purposes only.</i></p>
+      {/* <p className="text-xs"><i>For entertainment purposes only.</i></p> */}
       <div className="ad-banner-horizontal">
         {/* Display the randomly selected ad banner */}
         <a href="https://birdeye.so/token/PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc?chain=solana" target="_blank" rel="noopener noreferrer">

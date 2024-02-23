@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';// Assuming you have a custom hook for wallet connection
-import { useRouter } from 'next/router'; // Assuming you are using Next.js router
+import { useState, useEffect, useMemo } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useRouter } from 'next/router';
 
 const AirdropChecker = () => {
-  const [walletAddress, setWalletAddress] = useState('');
-  const [allocation, setAllocation] = useState('');
   const [manualWalletAddress, setManualWalletAddress] = useState('');
   const [manualAllocation, setManualAllocation] = useState('');
-  const [connectedAllocation, setConnectedAllocation] = useState(null);
   const [walletsList, setWalletsList] = useState({});
   const { publicKey } = useWallet();
   const router = useRouter();
@@ -29,13 +26,18 @@ const AirdropChecker = () => {
     fetchWalletData();
   }, []);
 
-
-  // Function to retrieve connected wallet information from local storage
-  const getConnectedWalletFromLocalStorage = () => {
-    const connectedWallet = localStorage.getItem('connectedWallet');
-    if (connectedWallet) {
-      setConnectedAllocation(connectedWallet);
+  const connectedAllocation = useMemo(() => {
+    if (!publicKey || !walletsList || !walletsList.hasOwnProperty) return '';
+    const walletAddress = publicKey.toBase58();
+    if (walletsList.hasOwnProperty(walletAddress)) {
+      return Number(walletsList[walletAddress]).toLocaleString();
     }
+    return '';
+  }, [publicKey, walletsList]);
+
+  const handleRefresh = () => {
+    // Refresh the webpage
+    window.location.reload();
   };
 
   const handleCheckAllocation = () => {
@@ -46,42 +48,13 @@ const AirdropChecker = () => {
       setManualAllocation('no');
     }
   };
-  
-
-  useEffect(() => {
-  if (publicKey && walletsList && Object.keys(walletsList).length > 0 && walletsList.hasOwnProperty(publicKey.toBase58())) {
-    const formattedAllocation = Number(walletsList[publicKey.toBase58()]).toLocaleString();
-    setConnectedAllocation(formattedAllocation);
-    // Save connected wallet information to local storage
-    localStorage.setItem('connectedWallet', formattedAllocation);
-  } else {
-    setConnectedAllocation('');
-    localStorage.removeItem('connectedWallet'); // Remove from local storage if no connected wallet
-  }
-}, [publicKey, walletsList]);
-
-
-  // Retrieve connected wallet information from local storage when the component mounts
-  useEffect(() => {
-    getConnectedWalletFromLocalStorage();
-  }, [router]); // Listen to router changes instead of location changes
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const handleRefresh = () => {
-    setRefreshing(true);
-    // Refresh the webpage
-    window.location.reload();
-  };
-
-  
 
   return (
     <div className="container">
       <div>
         <div className="bg-black-800 text-white py-4 px-4 text-center font-bold">
           <div>
-            {connectedAllocation !== null && connectedAllocation !== '' ? (
+            {connectedAllocation !== '' ? (
               <div className="bg-purple-800 text-white rounded-full py-4 px-4 text-center font-bold">
                 <p>You will receive {connectedAllocation} PAWN!</p>
               </div>
@@ -94,9 +67,8 @@ const AirdropChecker = () => {
             <button
               className="refresh-button"
               onClick={handleRefresh}
-              disabled={refreshing} // Disable the button while refreshing
             >
-              {refreshing ? 'Refreshing...' : ''}
+              Refresh
             </button>
           </div>
         </div>
