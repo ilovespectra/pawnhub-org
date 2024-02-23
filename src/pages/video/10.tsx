@@ -23,7 +23,7 @@ const VideoPage: React.FC = () => {
       <div className="video-container">
         <div className="sidebar-left">
           {/* Your ads or sidebar content on the left */}
-          <img src="/ad4.png" alt="Advertisement" />
+          <img src="/ad16.png" alt="Advertisement" />
         </div>
         <div className="video-player-wrapper">
         
@@ -42,7 +42,7 @@ const VideoPage: React.FC = () => {
         </div>
         <div className="sidebar-right">
   {/* Your ads or sidebar content on the right */}
-  <img src="/ad2.png" alt="Advertisement"/>
+  <img src="/ad14.png" alt="Advertisement"/>
 </div>
 </div>
     </div>

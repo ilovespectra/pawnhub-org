@@ -23,7 +23,7 @@ const VideoPage: React.FC = () => {
       <div className="video-container">
         <div className="sidebar-left">
           {/* Your ads or sidebar content on the left */}
-          <img src="/ad5.png" alt="Advertisement" />
+          <img src="/ad14.png" alt="Advertisement" />
         </div>
         <div className="video-player-wrapper">
         

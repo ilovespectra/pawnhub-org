@@ -22,7 +22,7 @@ const videos: Video[] = [
   { id: '9', title: 'Airdrop Day', thumbnailUrl: 'video9-thumbnail.jpg', likes: 69, views: 420 },
 ];
 
-const adImages = ['/ad1.png', '/ad3.png', '/ad6.png'];
+const adImages = ['/ad1.png', '/ad3.png', '/ad6.png', '/ad10.png', '/ad11.png', '/ad12.png', '/ad13.png'];
 
 const getRandomAdImage = () => {
   const randomIndex = Math.floor(Math.random() * adImages.length);
