@@ -27,10 +27,6 @@ const AboutPage: React.FC = () => {
             <p>We&apos;ve partnered with Kamino to offer liquidity providers native rewards. PAWN/SOL liquidity providers will have the opportunity to earn <b>moar</b> PAWN/SOL liquidity <i>(k-tokens)</i>!</p>
           </div>
           <div className="about-box">
-            <h2><b>THE EXPERIMENT</b></h2>
-            <p>All part of the experiment! We embark on an uncharted path into the unknown elements of DAO governance, game theory, and tokenomics in order to illuminate the possibilities enabled by SPL governance.</p>
-          </div>
-          <div className="about-box">
           <h2 className="about-title"><b>GOVERNANCE</b></h2>
           <p>- 1 PAWN required to vote</p>
           <p>- 100M PAWN required to cast proposals</p>
@@ -43,6 +39,10 @@ const AboutPage: React.FC = () => {
         <ul>-</ul>
         <ul>-</ul>
         </div>
+        <div className="about-box">
+            <h2><b>THE EXPERIMENT</b></h2>
+            <p>All part of the experiment! We embark on an uncharted path into the unknown elements of DAO governance, game theory, and tokenomics in order to illuminate the possibilities enabled by SPL governance.</p>
+          </div>
         <div className="about-box2">
           <h2 className="about-title"><b>DISTRIBUTION</b></h2>
             <p>1) <b>Pawn DAO:</b> 59% of supply allocated to Pawn DAO Realms Treasury:</p><br></br>
