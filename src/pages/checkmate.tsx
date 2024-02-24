@@ -17,6 +17,7 @@ const AirdropChecker = () => {
           throw new Error('Failed to fetch wallet data');
         }
         const data = await response.json();
+        console.log('Fetched wallets:', data); // Log fetched wallets
         setWalletsList(data);
       } catch (error) {
         console.error('Error fetching wallet data:', error);
@@ -27,16 +28,23 @@ const AirdropChecker = () => {
   }, []);
 
   const connectedAllocation = useMemo(() => {
-    if (!publicKey || !walletsList || walletsList.length === 0) return '';
-    const walletAddress = publicKey.toBase58();
-    const connectedWallet = walletsList.find(wallet => wallet.address === walletAddress);
-    return connectedWallet ? Number(connectedWallet.value).toLocaleString() : '';
-  }, [publicKey, walletsList]);
+  if (!publicKey || !walletsList || walletsList.length === 0) return '';
 
-  const handleRefresh = () => {
-    // Refresh the webpage
-    window.location.reload();
-  };
+  const walletAddress = publicKey.toBase58();
+  const connectedWallet = walletsList.find(wallet => wallet.address === walletAddress);
+
+  if (!connectedWallet) {
+    return 'notOnList'; // Indicate that the wallet is not on the drop list
+  }
+
+  const allocationValue = Number(connectedWallet.value);
+  if (allocationValue === 0) {
+    return 'no'; // If the allocation value is 0, return 'no'
+  } else {
+    return allocationValue.toLocaleString();
+  }
+}, [publicKey, walletsList]);
+
 
   const handleCheckAllocation = () => {
     const queriedWallet = walletsList.find(wallet => wallet.address === manualWalletAddress);
@@ -48,28 +56,25 @@ const AirdropChecker = () => {
     }
   };
 
+  console.log('Connected allocation:', connectedAllocation); // Log connected allocation
+
   return (
     <div className="container">
       <div>
         <div className="bg-black-800 text-white py-4 px-4 text-center font-bold">
-          <div>
-            {connectedAllocation !== '' ? (
-              <div className="bg-purple-800 text-white rounded-full py-4 px-4 text-center font-bold">
+          {connectedAllocation !== '' ? (
+            <div className="bg-purple-800 text-white rounded-full py-4 px-4 text-center font-bold">
+              {connectedAllocation !== 'no' && connectedAllocation !== 'notOnList' ? (
                 <p>You will receive {connectedAllocation} PAWN!</p>
-              </div>
-            ) : (
-              <div className="bg-purple-800 text-white rounded-full py-4 px-4 text-center font-bold">
-                <p>Connect a wallet to check the associated allocation</p>
-              </div>
-            )}
-            {/* Add the circular refresh button */}
-            {/* <button
-              className="refresh-button"
-              onClick={handleRefresh}
-            >
-              Refresh
-            </button> */}
-          </div>
+              ) : (
+                <p>Sorry, you&apos;re not on the list.</p>
+              )}
+            </div>
+          ) : (
+            <div className="bg-purple-800 text-white rounded-full py-4 px-4 text-center font-bold">
+              <p>Connect a wallet to check your allocation</p>
+            </div>
+          )}
         </div>
         <div className="flex items-center space-x-4">
           <input
@@ -94,6 +99,6 @@ const AirdropChecker = () => {
       </div>
     </div>
   );
-}
+        }  
 
 export default AirdropChecker;
