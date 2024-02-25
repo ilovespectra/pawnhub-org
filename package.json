@@ -26,6 +26,7 @@
     "bignumber.js": "^9.1.1",
     "csv-parser": "^3.0.0",
     "daisyui": "^2.46.0",
+    "firebase": "^10.8.0",
     "immer": "^9.0.16",
     "next": "^12.3.3",
     "next-compose-plugins": "^2.2.1",

@@ -17,7 +17,6 @@ const AirdropChecker = () => {
           throw new Error('Failed to fetch wallet data');
         }
         const data = await response.json();
-        console.log('Fetched wallets:', data); // Log fetched wallets
         setWalletsList(data);
       } catch (error) {
         console.error('Error fetching wallet data:', error);
