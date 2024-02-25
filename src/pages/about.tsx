@@ -30,7 +30,7 @@ const AboutPage: React.FC = () => {
           <h2 className="about-title"><b>GOVERNANCE</b></h2>
           <p>- 1 PAWN required to vote</p>
           <p>- 100M PAWN required to cast proposals</p>
-          <p className="about-title"><a href="https://birdeye.so/token/PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc?chain=solana" target="_blank" rel="noopener noreferrer"><p className="underline"><i>Realms</i></p></a></p>
+          <p className="about-title"><a href="https://app.realms.today/dao/PAWN" target="_blank" rel="noopener noreferrer"><p className="underline"><i>Realms</i></p></a></p>
           </div>
           <div className="about-box">
           <h2 className="about-title"><b>INTEGRATIONS</b></h2>
