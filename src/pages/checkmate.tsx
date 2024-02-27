@@ -94,7 +94,13 @@ const AirdropChecker = () => {
               <p>Queried wallet will receive {manualAllocation} PAWN!</p>
             </div>
           </div>
+          
         )}
+        <br></br>
+        <div className="centered-text">
+  <p className='text-gray-400 opacity-50'><i>Airdrop is NOT live yet!<br></br> Follow <a href=" https://twitter.com/pawnspl24" target="_blank" rel="noopener noreferrer" className='underline'>@pawnspl24</a> on Twitter to stay tuned!</i></p>
+</div>
+
       </div>
     </div>
   );

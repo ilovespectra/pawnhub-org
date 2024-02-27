@@ -301,3 +301,8 @@ a {
 .ad-banner-horizontal img {
   width: 100%;
 }
+
+.centered-text {
+  text-align: center;
+}
+

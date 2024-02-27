@@ -3,21 +3,36 @@ import { Keypair, PublicKey } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
 import { FC, useEffect, useRef } from "react";
 
+
 type TransferRequestQRProps = {
   reference: PublicKey,
 };
 
 export const TransferRequestQR: FC<TransferRequestQRProps> = ({ reference }) => {
   const qrRef = useRef<HTMLDivElement>(null);
+  const wallet = {
+    amountToSend: new BigNumber(100), // amount in PAWN
+    account: new PublicKey("YOUR_WALLET_PUBLIC_KEY"),
+  };
 
   useEffect(() => {
     // Create a transfer request QR code
+    type TransferRequestURLFields = {
+      recipient: PublicKey;
+      amount: BigNumber;
+      reference: PublicKey;
+      label: string;
+      message: string;
+      feePayer: PublicKey; // Add 'feePayer' property
+    };
+
     const urlParams: TransferRequestURLFields = {
-      recipient: Keypair.generate().publicKey,
-      amount: new BigNumber(1 / 1000), // amount in SOL
+      recipient: new PublicKey("7cFavLSqPDgU6RVQt1sa2GpjVXeDssU4sef68VDbfc2E"),
+      amount: wallet.amountToSend,
       reference,
-      label: 'My Store',
-      message: 'Thankyou for your purchase!',
+      label: 'Queens Gambit',
+      message: 'Thank you for your sacrifice!',
+      feePayer: wallet.account,
     };
     const solanaUrl = encodeURL(urlParams);
     const qr = createQR(solanaUrl, 512, 'transparent')
@@ -26,7 +41,7 @@ export const TransferRequestQR: FC<TransferRequestQRProps> = ({ reference }) => 
       qrRef.current.innerHTML = ''
       qr.append(qrRef.current)
     }
-  }, [reference]);
+  }, [reference, wallet]);
 
   return (
     <div className="rounded-2xl">
