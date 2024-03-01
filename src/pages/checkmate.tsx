@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
-import Countdown from 'components/countdown';
+import Countdown from 'components/countdown';//
 
 const AirdropChecker = () => {
   const [manualWalletAddress, setManualWalletAddress] = useState('');
