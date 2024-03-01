@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
+import Countdown from 'components/countdown';
 
 const AirdropChecker = () => {
   const [manualWalletAddress, setManualWalletAddress] = useState('');
@@ -27,23 +28,22 @@ const AirdropChecker = () => {
   }, []);
 
   const connectedAllocation = useMemo(() => {
-  if (!publicKey || !walletsList || walletsList.length === 0) return '';
+    if (!publicKey || !walletsList || walletsList.length === 0) return '';
 
-  const walletAddress = publicKey.toBase58();
-  const connectedWallet = walletsList.find(wallet => wallet.address === walletAddress);
+    const walletAddress = publicKey.toBase58();
+    const connectedWallet = walletsList.find(wallet => wallet.address === walletAddress);
 
-  if (!connectedWallet) {
-    return 'notOnList'; // Indicate that the wallet is not on the drop list
-  }
+    if (!connectedWallet) {
+      return 'notOnList'; // Indicate that the wallet is not on the drop list
+    }
 
-  const allocationValue = Number(connectedWallet.value);
-  if (allocationValue === 0) {
-    return 'no'; // If the allocation value is 0, return 'no'
-  } else {
-    return allocationValue.toLocaleString();
-  }
-}, [publicKey, walletsList]);
-
+    const allocationValue = Number(connectedWallet.value);
+    if (allocationValue === 0) {
+      return 'no'; // If the allocation value is 0, return 'no'
+    } else {
+      return allocationValue.toLocaleString();
+    }
+  }, [publicKey, walletsList]);
 
   const handleCheckAllocation = () => {
     const queriedWallet = walletsList.find(wallet => wallet.address === manualWalletAddress);
@@ -94,16 +94,17 @@ const AirdropChecker = () => {
               <p>Queried wallet will receive {manualAllocation} PAWN!</p>
             </div>
           </div>
-          
         )}
         <br></br>
         <div className="centered-text">
-  <p className='text-gray-400 opacity-50'><i>Airdrop is NOT live yet!<br></br> Follow <a href=" https://twitter.com/pawnspl24" target="_blank" rel="noopener noreferrer" className='underline'>@pawnspl24</a> on Twitter to stay tuned!</i></p>
-</div>
-
+        <div>
+          <Countdown /> 
+        </div>
+          <p className='text-gray-400 opacity-50'><i>Airdrop is NOT live yet!<br></br> Follow <a href=" https://twitter.com/pawnspl24" target="_blank" rel="noopener noreferrer" className='underline'>@pawnspl24</a> on Twitter to stay tuned!</i></p>
+        </div>
       </div>
     </div>
   );
-        }  
+};
 
 export default AirdropChecker;

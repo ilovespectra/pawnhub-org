@@ -306,3 +306,19 @@ a {
   text-align: center;
 }
 
+.timer-body {
+  background-color: none;
+  font-family: 'Digital-7', sans-serif;
+  color: rgb(118, 91, 174);
+  text-align: center;
+  font-family: 'courier new', sans-serif;
+  font-size: 24px;
+  background-image: url('');
+  background-size: 1000px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* Add some styling to the countdown numbers */
+.timer-number {
+  font-family: 'Digital-7', sans-serif;
+}
