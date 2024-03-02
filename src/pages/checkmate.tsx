@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
-import Countdown from 'components/countdown';//
+import Countdown from 'components/Countdown';
 
 const AirdropChecker = () => {
   const [manualWalletAddress, setManualWalletAddress] = useState('');
@@ -97,9 +97,9 @@ const AirdropChecker = () => {
         )}
         <br></br>
         <div className="centered-text">
-        <div>
-          <Countdown /> 
-        </div>
+          <div>
+            <Countdown /> {/* Add the 'Countdown' component */}
+          </div>
           <p className='text-gray-400 opacity-50'><i>Airdrop is NOT live yet!<br></br> Follow <a href=" https://twitter.com/pawnspl24" target="_blank" rel="noopener noreferrer" className='underline'>@pawnspl24</a> on Twitter to stay tuned!</i></p>
         </div>
       </div>
