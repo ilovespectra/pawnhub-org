@@ -302,6 +302,14 @@ a {
   width: 100%;
 }
 
+@media (max-width: 860px) {
+  .ad-banner-horizontal {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 .centered-text {
   text-align: center;
 }
@@ -322,3 +330,4 @@ a {
 .timer-number {
   font-family: 'Digital-7', sans-serif;
 }
+
