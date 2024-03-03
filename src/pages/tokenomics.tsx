@@ -25,16 +25,16 @@ const Tokenomics: React.FC = () => {
                 <div className="about-box2">
                     <h2 className="about-title">Token Allocation:</h2>
                     <ul className="about-list">
-                        <li><b>&bull; Initial Circulating Supply:</b> 10,000,000,000,000 (10 Trillion Tokens)</li>
-                        <li><b>&bull; Pawn DAO:</b> 59% of supply allocated to Pawn DAO Realms Treasury</li>
+                        <li><b>Initial Circulating Supply:</b> 10,000,000,000,000 (10 Trillion Tokens)</li><br></br>
+                        <li><b>Pawn DAO:</b> 59% of supply allocated to Pawn DAO Realms Treasury</li>
                         <li><b>&bull; Liquidity Pool:</b> 10% of supply allocated for Liquidity Provision</li>
                         <li><b>&bull; Reserve Fund:</b> 5% of supply allocated to Pawn Marketing</li>
                         <li><b>&bull; Team and Creators:</b> 5% of supply allocated for “PAWN” Reserve</li>
                         <li><b>&bull; Solana Ecosystem:</b> 33% of supply allocated to Solana Ecosystem Communities</li>
                         <li><b>&bull; Repayment to The King:</b> 2.6% reimbursed to The King for deploying Liquidity</li>
                         <li><b>&bull; Butter & Dean:</b> 3.4% allocated to Dean and Butter for roles provided</li>
-                        <li><b>&bull; Pawn Community:</b> 34% of supply airdropped to early “Pawn” Contributors</li>
-                        <li><b>&bull; Tatami Maker:</b> 7% of supply allocated to Tatami Maker and All Stars</li>
+                        <li><b>Pawn Community:</b> 34% of supply airdropped to early “Pawn” Contributors</li>
+                        <li><b>Tatami Maker:</b> 7% of supply allocated to Tatami Maker and All Stars</li>
                     </ul>
                 </div>
 
