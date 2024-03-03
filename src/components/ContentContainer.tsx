@@ -30,6 +30,11 @@ export const ContentContainer: FC = props => {
             </Link>
           </li>
           <li onClick={closeDrawer}>
+            <Link href="/tokenomics">
+              <a>Tokenomics</a>
+            </Link>
+          </li>
+          <li onClick={closeDrawer}>
             <Link href="/checkmate">
               <a>Check Mate</a>
             </Link>
