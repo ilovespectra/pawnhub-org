@@ -11,6 +11,7 @@ interface Video {
 }
 
 const videos: Video[] = [
+  { id: '12', title: 'War Never Changes', thumbnailUrl: 'video12-thumbnail.jpg', likes: 100, views: 69 },
   { id: '11', title: 'Are you a Believer?', thumbnailUrl: 'video11-thumbnail.jpg', likes: 100, views: 69 },
   { id: '10', title: 'Pawn Did it First', thumbnailUrl: 'video10-thumbnail.jpg', likes: 100, views: 69 },
   { id: '1', title: 'Pool Boi', thumbnailUrl: 'video1-thumbnail.jpg', likes: 69, views: 420 },
