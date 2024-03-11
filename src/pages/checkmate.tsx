@@ -100,7 +100,7 @@ const AirdropChecker = () => {
           <div>
             <Countdown /> {/* Add the 'Countdown' component */}
           </div>
-          <p className='text-gray-400 opacity-50'><i>Airdrop is NOT live yet!<br></br> Follow <a href=" https://twitter.com/pawnspl24" target="_blank" rel="noopener noreferrer" className='underline'>@pawnspl24</a> on Twitter to stay tuned!</i></p>
+          <p className='text-gray-400 opacity-50'><i>Follow <a href=" https://twitter.com/pawnspl24" target="_blank" rel="noopener noreferrer" className='underline'>@pawnspl24</a> on Twitter to stay tuned!</i></p>
         </div>
       </div>
     </div>
