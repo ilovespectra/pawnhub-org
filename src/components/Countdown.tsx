@@ -6,7 +6,7 @@ const Countdown: React.FC = () => {
 
     useEffect(() => {
         // Set the date for Drop Day
-        const ddayCountdownDate = new Date("Mar 14, 2024 03:14:15").getTime();
+        const ddayCountdownDate = new Date("Mar 14, 2024 15:14:15").getTime();
 
         // Update the count down every 1 second
         const interval = setInterval(() => {
