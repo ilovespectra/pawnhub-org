@@ -3,6 +3,14 @@ import React from 'react';
 const Tokenomics: React.FC = () => {
     return (
         <div className="container">
+            <div className="token-links">
+                <a href="https://jup.ag/swap/SOL-PAWN_PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc" target="_blank" rel="noopener noreferrer" className="token-link">
+                    <img src="jup.png" alt="Jupiter logo" className="token-logo" />
+                </a>
+                <a href="https://birdeye.so/token/PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc?chain=solana" target="_blank" rel="noopener noreferrer" className="token-link">
+                    <img src="birdeye.png" alt="Birdeye logo" className="token-logo" />
+                </a>
+            </div>
             <div className="about-container">
                 <div className="about-box2">
                     <h2 className="about-title"><b>PAWN Tokenomics:</b></h2>
