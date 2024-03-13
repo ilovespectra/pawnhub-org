@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCopy } from 'react-icons/fa';
 
 const SolanaInstallationGuide: React.FC = () => {
     const [copied, setCopied] = useState(false);
+    const [showInstructions, setShowInstructions] = useState(true);
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText("solana-keygen grind --starts-with pawn:1 ");
@@ -11,6 +12,19 @@ const SolanaInstallationGuide: React.FC = () => {
             setCopied(false);
         }, 2000);
     };
+
+    useEffect(() => {
+      const handleResize = () => {
+          setShowInstructions(window.innerWidth > 760);
+      };
+
+      handleResize(); // Initial check
+
+      window.addEventListener('resize', handleResize);
+
+      return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
     return (
         <div className="container">
@@ -27,10 +41,11 @@ const SolanaInstallationGuide: React.FC = () => {
                     {copied && <span className="copied-msg">Copied!</span>}
                 </div>
             </div>
-            <p><i>Required: Solana CLI Tool Suite</i></p>
-            <div className="installation-guide">
-          <h1>Solana Installation Guide</h1>
-          <h2>Use Solana&apos;s Install Tool (Simplest option)</h2>
+            {showInstructions ? (
+                <>
+                    <p><i>Required: Solana CLI Tool Suite</i></p>
+                    <div className="installation-guide">
+                    <h2>Use Solana&apos;s Install Tool (Simplest option)</h2>
           <p>
             <h2>MacOS & Linux</h2>
             &bull; Open your favorite Terminal application and run the following command:
@@ -173,6 +188,12 @@ set PATH=%cd%/bin;%PATH%
                 <p><i>Reference: <a href="https://docs.solanalabs.com/cli/install" target="_blank" rel="noopener noreferrer">Official Solana Docs</a></i></p>
             </div>
         </div>
+                </>
+            ) : (
+                <div className="desktop-message">
+                    To view installation instructions, view on desktop.
+                </div>
+            )}
             <style jsx>{`
 
 .container {
@@ -184,6 +205,7 @@ set PATH=%cd%/bin;%PATH%
     background-color: black;
     font-family: Arial, sans-serif;
     color: white;
+    
   }
   .pawn-keygen {
     text-align: center;
