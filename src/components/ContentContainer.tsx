@@ -44,6 +44,11 @@ export const ContentContainer: FC = props => {
               <a>Queen&apos;s Gambit</a>
             </Link>
           </li>
+          <li onClick={closeDrawer}>
+            <Link href="/pawnkey">
+              <a>Pawn Keygen</a>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
