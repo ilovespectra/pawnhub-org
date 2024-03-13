@@ -191,7 +191,7 @@ set PATH=%cd%/bin;%PATH%
                 </>
             ) : (
                 <div className="desktop-message">
-                    To view installation instructions, view on desktop.
+                    For installation instructions, view on desktop.
                 </div>
             )}
             <style jsx>{`
