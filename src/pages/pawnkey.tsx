@@ -2,6 +2,31 @@ import { useState, useEffect } from "react";
 import { FaCopy } from 'react-icons/fa';
 
 const SolanaInstallationGuide: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false); // State to track loading status
+  
+    const generateKeyPair = async () => {
+      setIsLoading(true); // Set loading state to true when key generation starts
+      try {
+        const response = await fetch('/api/generateKey');
+        if (!response.ok) {
+          throw new Error('Failed to generate keypair');
+        }
+        const keyPairData = await response.text(); // Get the key pair data from the response
+        const blob = new Blob([keyPairData], { type: 'application/json' });
+        const downloadUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = 'pawn-keypair.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (error) {
+        console.error('Error generating keypair:', error);
+      } finally {
+        setIsLoading(false); // Set loading state to false when key generation completes (whether successful or not)
+      }
+    };
+
     const [copied, setCopied] = useState(false);
     const [showInstructions, setShowInstructions] = useState(true);
 
@@ -27,12 +52,19 @@ const SolanaInstallationGuide: React.FC = () => {
 
 
     return (
+      
         <div className="container">
+           
             <div className="instructions">
                 <h1>Pawn Keygen</h1>
-                <p>
-                    Run this command to create a unique keypair starting with &apos;pawn&apos;<br></br><br></br>
-                </p>
+                <div className="pawn-key-container">
+        <div className="button-container">
+        <div className="instruction">Click to grind a pawn key</div>
+          <img src="/whitesquare.png" alt="Grind Pawn Key" onClick={generateKeyPair} style={{ cursor: 'pointer' }} />
+          <img src="/grinding.gif" alt="Loading" className={isLoading ? 'loading-gif visible' : 'loading-gif'} />
+
+        </div>
+      </div>
                 <div className="code-container">
                     <code>solana-keygen grind --starts-with pawn:1</code>
                     <button className="copy-btn" onClick={copyToClipboard}>

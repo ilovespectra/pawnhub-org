@@ -356,3 +356,49 @@ a {
   transform: scale(0.9);
   border-radius: 20px;
 }
+
+/* Check button styles */
+.key-button {
+  flex-shrink: 0;
+  padding: 10px 20px;
+  border: none;
+  background-color: #3d1363;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.key-button:hover {
+  background-color: #771cb8;
+}
+
+.loading-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100px; /* Adjust the width as needed */
+  margin-top: 10px;
+}
+
+.pawn-key-container {
+  text-align: center;
+}
+
+.button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.loading-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.loading-gif.visible {
+  display: block;
+}
+
+.instruction {
+  margin-top: 8px;
+}
