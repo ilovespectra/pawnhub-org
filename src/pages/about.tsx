@@ -32,7 +32,7 @@ const AboutPage: React.FC = () => {
           </div>
           <div className="about-box">
             <h2><b>REWARDS</b></h2>
-            <p>We&apos;ve partnered with Kamino to offer liquidity providers native rewards. PAWN/SOL liquidity providers will have the opportunity to earn <b>moar</b> PAWN/SOL liquidity <i>(k-tokens)</i>!</p>
+            <p>We&apos;ve partnered with Kamino to offer liquidity providers native rewards. PAWN/SOL liquidity providers will have the opportunity to earn <b>moar</b> PAWN!</p>
           </div>
           <div className="about-box">
           <h2 className="about-title"><b>GOVERNANCE</b></h2>
