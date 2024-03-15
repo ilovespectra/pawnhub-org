@@ -28,7 +28,7 @@
     "child_process": "^1.0.2",
     "csv-parser": "^3.0.0",
     "daisyui": "^2.46.0",
-    "firebase": "^10.8.0",
+    "firebase": "^9.6.5",
     "immer": "^9.0.16",
     "next": "^12.3.3",
     "next-compose-plugins": "^2.2.1",

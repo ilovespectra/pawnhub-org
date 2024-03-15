@@ -1,5 +1,5 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, PublicKey, Transaction, TransactionSignature } from '@solana/web3.js';
+import { PublicKey, Transaction, TransactionSignature } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
 import { notify } from '../utils/notifications';
 import { createBurnCheckedInstruction, getAssociatedTokenAddress } from "@solana/spl-token";
@@ -7,11 +7,9 @@ import { createBurnCheckedInstruction, getAssociatedTokenAddress } from "@solana
 // Define the PAWN token ID
 const PAWN_TOKEN_ID = 'PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc';
 
-type SendTransferRequestProps = {
-  reference: PublicKey,
-};
+type SendTransferRequestProps = {};
 
-export const SendTransferRequest: FC<SendTransferRequestProps> = ({ reference }) => {
+export const SendTransferRequest: FC<SendTransferRequestProps> = () => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
@@ -49,13 +47,13 @@ export const SendTransferRequest: FC<SendTransferRequestProps> = ({ reference })
       notify({ type: 'error', message: `Transaction failed!`, description: error?.message });
       console.error(`Transaction failed! ${error?.message}`);
     }
-  }, [publicKey, connection, reference, sendTransaction]);
+  }, [publicKey, connection, sendTransaction]);
 
   return (
     <div>
       <button
         className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[purple] to-[black] hover:from-pink-800 hover:to-purple-800 ... "
-        onClick={onClick} 
+        // onClick={onClick} 
         disabled={!publicKey}
       >
         <div className="hidden group-disabled:block ">
