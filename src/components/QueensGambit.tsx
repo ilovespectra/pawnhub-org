@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Connection, PublicKey, TransactionMessage, VersionedTransaction } from "@solana/web3.js";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { createBurnCheckedInstruction, getAssociatedTokenAddress } from "@solana/spl-token";
 
 const BurnTokenComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [burnResult, setBurnResult] = useState(null);
-    const { publicKey, signTransaction, connect } = useWallet();
+    const { publicKey, signTransaction } = useWallet();
     // Define the token program ID
-const TOKEN_PROGRAM_ID = new PublicKey('PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc');
+    const TOKEN_PROGRAM_ID = new PublicKey('PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc');
 
-// Define your Helius API key
-const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
+    // Define your Helius API key
+    const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
 
     const handleClick = async () => {
         setIsLoading(true);
@@ -19,7 +19,7 @@ const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
             if (!publicKey) {
                 throw new Error('Wallet not connected. Please connect your wallet.');
             }
-    
+
             console.log("Fetching associated token address...");
             // Define constants
             const QUICKNODE_RPC = process.env.NEXT_PUBLIC_RPC_URL;
@@ -27,11 +27,11 @@ const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
             const MINT_DECIMALS = 5;
             const BURN_QUANTITY_PAWN = 420;
             const BURN_QUANTITY_LAMPORTS = BURN_QUANTITY_PAWN * Math.pow(10, MINT_DECIMALS);
-    
+
             // Fetch associated token account address
             const account = await getAssociatedTokenAddress(new PublicKey(MINT_ADDRESS), publicKey);
             console.log("Associated token address fetched:", account);
-            console.log("Priority fee payer:", publicKey.toString());
+            
             console.log("Creating burn instruction...");
             // Create burn instruction
             const burnIx = createBurnCheckedInstruction(
@@ -42,16 +42,16 @@ const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
                 MINT_DECIMALS
             );
             console.log("Burn instruction created:", burnIx);
-    
+
             console.log("Connecting to Solana network...");
             // Connect to Solana network
             const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC);
-    
+
             console.log("Fetching latest blockhash...");
             // Fetch blockhash
             const { blockhash, lastValidBlockHeight } = await SOLANA_CONNECTION.getLatestBlockhash('finalized');
             console.log("Latest blockhash fetched:", blockhash);
-    
+
             console.log("Estimating priority fees...");
             // Fetch priority fees
             const response = await fetch(`${HELIUS_API}`, {
@@ -81,30 +81,21 @@ const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
             console.log(`Adjusted priority fee: ${fees} lamports`);
             console.log("Assembling transaction...");
             // Assemble transaction with priority fee
-            const messageV0 = new TransactionMessage({
-                payerKey: publicKey,
-                recentBlockhash: blockhash,
-                instructions: [burnIx],
-                feePayer: publicKey, // Set the fee payer to the connected wallet
-                recentFeeCalculation: { // Include the priority fee
-                    value: {
-                        lamportsPerSignature: fees
-                    }
-                }
-            }).compileToV0Message();
-            const transaction = new VersionedTransaction(messageV0);
-            console.log("Transaction assembled:", transaction);
-    
+            const transaction = new Transaction().add(burnIx);
+            transaction.recentBlockhash = blockhash;
+            transaction.feePayer = publicKey;
+            transaction.setSigners(publicKey); // Set the signer
+            console.log("Priority fee payer:", publicKey.toString());
             console.log("Signing transaction...");
             // Sign transaction
             const signedTransaction = await signTransaction(transaction);
             console.log("Transaction signed:", signedTransaction);
-    
+
             console.log("Sending transaction...");
             // Send transaction
             const txid = await SOLANA_CONNECTION.sendRawTransaction(signedTransaction.serialize());
             console.log("Transaction sent. Transaction ID:", txid);
-    
+
             console.log("Confirming transaction...");
             // Confirm transaction
             const confirmation = await SOLANA_CONNECTION.confirmTransaction({
@@ -113,11 +104,11 @@ const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
                 lastValidBlockHeight: lastValidBlockHeight
             });
             console.log("Transaction confirmed:", confirmation);
-    
+
             if (confirmation.value.err) {
                 throw new Error("Transaction not confirmed.");
             }
-    
+
             setBurnResult({
                 success: true,
                 txid: txid
@@ -136,23 +127,23 @@ const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
     const reloadPage = () => {
         window.location.reload(); // Reload the page
     };
-    
+
     return (
         <div className="hero-content bg-black rounded-2xl text-center p-4">
             <div className="max-w-lg mx-auto">
                 {isLoading ? (
                     <div className="flex flex-col items-center justify-center">
-                        <img src="/burning.gif" alt="Loading..." style={{ width: '350px', height: 'auto'}} />
+                        <img src="/burning.gif" alt="Loading..." style={{ width: '350px', height: 'auto' }} />
                     </div>
                 ) : (
                     publicKey ? (
                         burnResult ? (
-                            <img src="/repeat.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto'}} />
+                            <img src="/repeat.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto' }} />
                         ) : (
-                            <img src="/burn420.gif" alt="Sacrifice 420 PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '350px', height: 'auto'}} />
+                            <img src="/burn420.gif" alt="Sacrifice 420 PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '350px', height: 'auto' }} />
                         )
                     ) : (
-                        <img src="/connect2burn.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '350px', height: 'auto'}} />
+                        <img src="/connect2burn.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '350px', height: 'auto' }} />
                     )
                 )}
 
