@@ -23,7 +23,7 @@ const Transfer: NextPage = () => {
           <img src="/pawnboi.png" alt="Pawnboi" className="mx-auto mb-4" style={{ width: '200px', height: 'auto'}} />
           <div className="max-w-lg mx-auto">
             <h1 className="text-3xl font-bold text-purple-800 mb-4">PAWN Sacrifice</h1>
-            <SendTransferRequest reference={reference} />
+            <SendTransferRequest />
           </div>
         </div>
       </div>
