@@ -160,6 +160,7 @@ const BurnTokenComponent = () => {
                                 <p>{burnResult.error}</p>
                             </div>
                         )}
+                        <p><i>experiemental feature in beta</i></p>
                     </div>
                 )}
             </div>
