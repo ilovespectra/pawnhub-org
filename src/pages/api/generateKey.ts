@@ -7,6 +7,22 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL;
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Allow requests from any origin
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Allow the following methods
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+
+  // Allow the following headers
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Check if it's a preflight request
+  if (req.method === 'OPTIONS') {
+    // End the request with a 200 status for preflight requests
+    res.status(200).end();
+    return;
+  }
+
   // Update the solana-keygen command to include your RPC URL
   const command = `solana-keygen grind --starts-with pawn:1`;
 
@@ -17,27 +33,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
     
-    // Extract the file name from the stdout
-    const match = stdout.match(/Wrote keypair to (\S+)/);
+    // Extract the keypair from the stdout
+    const match = stdout.match(/"pubkey": "([a-zA-Z0-9]+)"/);
     if (!match || match.length < 2) {
       return res.status(500).json({ error: 'Failed to generate keypair' });
     }
-    const filename = match[1];
+    const publicKey = match[1];
 
-    // Set the response headers for file download
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-    res.setHeader('Content-Type', 'application/json');
-
-    // Read the contents of the key pair file and send it as the response
-    const fs = require('fs');
-    const path = require('path');
-    const filePath = path.join(process.cwd(), filename);
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        console.error('Error reading key pair file:', err);
-        return res.status(500).json({ error: 'Failed to read key pair file' });
-      }
-      res.status(200).send(data);
-    });
+    // Send the public key as the response
+    res.status(200).json({ publicKey });
   });
 }

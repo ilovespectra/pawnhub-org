@@ -26,7 +26,7 @@ const SolanaInstallationGuide: React.FC = () => {
         setIsLoading(false); // Set loading state to false when key generation completes (whether successful or not)
       }
     };
-
+    
     const [copied, setCopied] = useState(false);
     const [showInstructions, setShowInstructions] = useState(true);
 
@@ -52,19 +52,12 @@ const SolanaInstallationGuide: React.FC = () => {
 
 
     return (
-      
         <div className="container">
-           
             <div className="instructions">
                 <h1>Pawn Keygen</h1>
-                <div className="pawn-key-container">
-        <div className="button-container">
-        <div className="instruction">Click to grind a pawn key</div>
-          <img src="/whitesquare.png" alt="Grind Pawn Key" onClick={generateKeyPair} style={{ cursor: 'pointer' }} />
-          <img src="/grinding.gif" alt="Loading" className={isLoading ? 'loading-gif visible' : 'loading-gif'} />
-
-        </div>
-      </div>
+                <p>
+                    Run this command to create a unique keypair starting with &apos;pawn&apos;<br></br><br></br>
+                </p>
                 <div className="code-container">
                     <code>solana-keygen grind --starts-with pawn:1</code>
                     <button className="copy-btn" onClick={copyToClipboard}>
