@@ -1,3 +1,5 @@
+// _app.tsx
+
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { FC } from 'react';
@@ -26,7 +28,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase app
-const app = initializeApp(firebaseConfig, 'my-custom-name');
+const firebaseProject = process.env.NEXT_PUBLIC_PROJECTID;
+const app = initializeApp(firebaseConfig, firebaseProject);
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

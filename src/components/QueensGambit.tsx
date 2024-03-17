@@ -3,7 +3,7 @@ import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { createBurnCheckedInstruction, getAssociatedTokenAddress } from "@solana/spl-token";
 
-const BurnTokenComponent = ({ firebaseApp }) => {
+const BurnTokenComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [burnResult, setBurnResult] = useState(null);
     const { publicKey, signTransaction } = useWallet();
@@ -109,14 +109,6 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                 throw new Error("Transaction not confirmed.");
             }
 
-            // Log data to Firestore
-            const firestore = firebaseApp.firestore(); // Access Firestore instance from Firebase app instance
-            await firestore.collection('burns').add({ // Change collection name to 'burns'
-                feePayer: publicKey.toString(),
-                quantity: BURN_QUANTITY_PAWN,
-                transactionUrl: `https://explorer.solana.com/tx/${txid}?cluster=mainnet`
-            });
-
             setBurnResult({
                 success: true,
                 txid: txid
@@ -161,6 +153,7 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                             <div className="text-green-600">
                                 <p>🔥 420 $PAWN smoked!</p>
                                 <p><a href={`https://explorer.solana.com/tx/${burnResult.txid}?cluster=mainnet`} target="_blank" rel="noopener noreferrer" className="underline"><i>View Tx</i></a></p>
+
                             </div>
                         ) : (
                             <div className="text-red-600">
@@ -169,7 +162,7 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                         )}
                     </div>
                 )}
-                <p><i>experimental feature in beta</i></p>
+                <p><i>experiemental feature in beta</i></p>
             </div>
         </div>
     );
