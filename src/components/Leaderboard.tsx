@@ -48,14 +48,16 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
 
     return (
         <div className="leaderboard mt-8 w-full max-w-screen-lg mx-auto">
-            <h2 className="text-center text-2xl font-bold mb-4 text-purple-600">Masters:</h2>
+            <div className="text-center mb-4">
+                <img src="masters.png" alt="Masters" className="mx-auto" style={{ width: '50vh', height: 'auto' }}/>
+            </div>
             <div className="grid grid-cols-1 gap-4">
                 {leaderboardData.map(([signer, quantity], index) => (
                     <div key={signer} className="border border-gray-200 p-2 rounded-md bg-purple-900" style={{ width: '50vh', height: 'auto' }}>
                         <div className="font-bold text-lg text-purple-600">
                             {index + 1}. ♟️<span style={{ color: 'white' }}>{quantity}</span>
                         </div>
-                        <div className="text-lg">{truncateSigner(signer)}</div>
+                        <div className="text-sm">{truncateSigner(signer)}</div>
                     </div>
                 ))}
             </div>
