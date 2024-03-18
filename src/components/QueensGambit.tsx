@@ -2,16 +2,42 @@ import React, { useState } from 'react';
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { createBurnCheckedInstruction, getAssociatedTokenAddress } from "@solana/spl-token";
+import { getFirestore, collection, addDoc } from 'firebase/firestore'; 
+import { initializeApp } from 'firebase/app';
+import Leaderboard from './Leaderboard'; // Import Leaderboard component
 
-const BurnTokenComponent = () => {
+const BurnTokenComponent = ({ firebaseApp }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [burnResult, setBurnResult] = useState(null);
     const { publicKey, signTransaction } = useWallet();
     // Define the token program ID
     const TOKEN_PROGRAM_ID = new PublicKey('PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc');
-
-    // Define your Helius API key
     const HELIUS_API = process.env.NEXT_PUBLIC_RPC_URL;
+    // Firebase initialization moved inside the component
+    const firebaseConfig = {
+        apiKey: process.env.NEXT_PUBLIC_API_KEY,
+        authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+        projectId: process.env.NEXT_PUBLIC_PROJECTID,
+        storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+        messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
+        appId: process.env.NEXT_PUBLIC_APP_ID
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const logBurnToFirestore = async (signer, quantity, txid) => {
+        try {
+            // Add a new document with a generated id
+            const docRef = await addDoc(collection(db, "burns"), {
+                signer,
+                quantity,
+                txid
+            });
+            console.log("Burn transaction logged to Firestore with ID: ", docRef.id);
+        } catch (error) {
+            console.error("Error adding document: ", error);
+        }
+    };
 
     const handleClick = async () => {
         setIsLoading(true);
@@ -23,7 +49,7 @@ const BurnTokenComponent = () => {
             console.log("Fetching associated token address...");
             // Define constants
             const QUICKNODE_RPC = process.env.NEXT_PUBLIC_RPC_URL;
-            const MINT_ADDRESS = 'PawnQTCFsTwVFH2BHBvxyrq96m9G8QJGCGYev6VeYrc';
+            const MINT_ADDRESS = TOKEN_PROGRAM_ID.toBase58();
             const MINT_DECIMALS = 5;
             const BURN_QUANTITY_PAWN = 420;
             const BURN_QUANTITY_LAMPORTS = BURN_QUANTITY_PAWN * Math.pow(10, MINT_DECIMALS);
@@ -75,10 +101,7 @@ const BurnTokenComponent = () => {
             let fees = responseJson?.result?.priorityFeeLevels?.high ?? 0;
             console.log(`HIGH priority fee: ${fees} lamports`);
 
-            // Triple the fee quote
-            fees *= 10;
-
-            console.log(`Adjusted priority fee: ${fees} lamports`);
+            fees *= 1;
             console.log("Assembling transaction...");
             // Assemble transaction with priority fee
             const transaction = new Transaction().add(burnIx);
@@ -109,6 +132,9 @@ const BurnTokenComponent = () => {
                 throw new Error("Transaction not confirmed.");
             }
 
+            // Log burn transaction to Firestore
+            await logBurnToFirestore(publicKey.toString(), BURN_QUANTITY_PAWN, txid);
+
             setBurnResult({
                 success: true,
                 txid: txid
@@ -129,40 +155,34 @@ const BurnTokenComponent = () => {
     };
 
     return (
-        <div className="hero-content bg-black rounded-2xl text-center p-4">
-            <div className="max-w-lg mx-auto">
-                {isLoading ? (
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/burning.gif" alt="Loading..." style={{ width: '350px', height: 'auto' }} />
-                    </div>
-                ) : (
-                    publicKey ? (
-                        burnResult ? (
-                            <img src="/repeat.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto' }} />
-                        ) : (
-                            <img src="/burn420.gif" alt="Sacrifice 420 PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '350px', height: 'auto' }} />
-                        )
+        <div className="hero-content bg-black rounded-2xl text-center p-4 w-4/5 max-w-screen-lg mx-auto" style={{ width: '800px', marginLeft: '50px', marginRight: '50px' }} >
+            <div className="flex flex-col items-center justify-center">
+                <div>
+                    {isLoading ? (
+                        <div className="flex flex-col items-center justify-center">
+                            <img src="/burningpawn.gif" alt="Loading..." style={{ width: '350px', height: 'auto' }} />
+                        </div>
                     ) : (
-                        <img src="/connect2burn.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '350px', height: 'auto' }} />
-                    )
-                )}
-
-                {burnResult && (
-                    <div className="mt-4 text-left max-w-lg mx-auto">
-                        {burnResult.success ? (
-                            <div className="text-green-600">
-                                <p>🔥 420 $PAWN smoked!</p>
-                                <p><a href={`https://explorer.solana.com/tx/${burnResult.txid}?cluster=mainnet`} target="_blank" rel="noopener noreferrer" className="underline"><i>View Tx</i></a></p>
-
-                            </div>
-                        ) : (
-                            <div className="text-red-600">
-                                <p>{burnResult.error}</p>
-                            </div>
-                        )}
-                    </div>
-                )}
-                <p><i>experiemental feature in beta</i></p>
+                        <>
+                            {publicKey ? (
+                                burnResult ? (
+                                    burnResult.success ? (
+                                        <img src="/repeat2.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto' }} />
+                                    ) : (
+                                        <img src="/failedretry.gif" alt="Failed retry" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto' }} />
+                                    )
+                                ) : (
+                                    <img src="/sacrificepawn.gif" alt="Sacrifice 420 PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '350px', height: 'auto' }} />
+                                )
+                            ) : (
+                                <img src="/connect2.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '350px', height: 'auto' }} />
+                            )}
+                        </>
+                    )}
+                </div>
+                <div className="mt-4">
+                    <Leaderboard firebaseApp={firebaseApp} /> {/* Include Leaderboard component */}
+                </div>
             </div>
         </div>
     );

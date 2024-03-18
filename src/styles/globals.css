@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Reset styles */
 html,
 body {
@@ -401,4 +402,8 @@ a {
 
 .instruction {
   margin-top: 8px;
+}
+
+.font-alarm-clock {
+    font-family: 'DS Digital', sans-serif;
 }

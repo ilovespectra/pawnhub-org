@@ -11,25 +11,25 @@ import { Footer } from '../components/Footer';
 import Notifications from '../components/Notification';
 import { Layout } from 'components/Layout';
 
-// Import necessary modules from Firebase
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+// // Import necessary modules from Firebase
+// import { initializeApp } from 'firebase/app';
+// import { getFirestore } from 'firebase/firestore';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 require('../styles/globals.css');
 
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECTID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
-  appId: process.env.NEXT_PUBLIC_APP_ID
-};
+// const firebaseConfig = {
+//   apiKey: process.env.NEXT_PUBLIC_API_KEY,
+//   authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+//   projectId: process.env.NEXT_PUBLIC_PROJECTID,
+//   storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+//   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
+//   appId: process.env.NEXT_PUBLIC_APP_ID
+// };
 
 // Initialize Firebase app
-const firebaseProject = process.env.NEXT_PUBLIC_PROJECTID;
-const app = initializeApp(firebaseConfig, firebaseProject);
+// const firebaseProject = process.env.NEXT_PUBLIC_PROJECTID;
+// const app = initializeApp(firebaseConfig, firebaseProject);
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -51,7 +51,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           <ContentContainer>
             <Layout>
               {/* Pass the Firebase app instance to the components */}
-              <Component {...pageProps} firebaseApp={app} />
+              <Component {...pageProps}/>
             </Layout>
           </ContentContainer>
           <Footer />

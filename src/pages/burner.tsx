@@ -10,6 +10,7 @@ const BurnPage: NextPage = () => {
     <div className="container mx-auto">
       <div className="mt-8">
         <div className="flex justify-center mt-4">
+          {/* Pass firebaseApp to BurnTokenComponent */}
           <BurnTokenComponent/>
         </div>
       </div>
