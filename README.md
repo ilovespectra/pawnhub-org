@@ -6,8 +6,6 @@ Created and managed by Pawn DAO. The PAWN memecoin is the governing token of Paw
 
 - Change `.env.template` to `.env`
 
-- Add URL to wallet-list json
-
 - Run
 
 ```
