@@ -160,22 +160,22 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                 <div>
                     {isLoading ? (
                         <div className="flex flex-col items-center justify-center">
-                            <img src="/burningpawn.gif" alt="Loading..." style={{ width: '350px', height: 'auto' }} />
+                            <img src="/burningpawn.gif" alt="Loading..." style={{ width: '300px', height: 'auto' }} />
                         </div>
                     ) : (
                         <>
                             {publicKey ? (
                                 burnResult ? (
                                     burnResult.success ? (
-                                        <img src="/repeat2.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto' }} />
+                                        <img src="/repeat2.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '300px', height: 'auto' }} />
                                     ) : (
-                                        <img src="/failedretry.gif" alt="Failed retry" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '350px', height: 'auto' }} />
+                                        <img src="/failedretry.gif" alt="Failed retry" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '300px', height: 'auto' }} />
                                     )
                                 ) : (
-                                    <img src="/sacrificepawn.gif" alt="Sacrifice 420 PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '350px', height: 'auto' }} />
+                                    <img src="/sacrificepawn.gif" alt="Sacrifice 420 PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '300px', height: 'auto' }} />
                                 )
                             ) : (
-                                <img src="/connect2.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '350px', height: 'auto' }} />
+                                <img src="/connect2.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '300px', height: 'auto' }} />
                             )}
                         </>
                     )}
