@@ -78,7 +78,6 @@ const BurnTokenComponent = ({ firebaseApp }) => {
             const { blockhash, lastValidBlockHeight } = await SOLANA_CONNECTION.getLatestBlockhash('finalized');
             console.log("Latest blockhash fetched:", blockhash);
 
-            console.log("Estimating priority fees...");
             // Fetch priority fees
             const response = await fetch(`${HELIUS_API}`, {
                 method: "POST",
@@ -99,7 +98,6 @@ const BurnTokenComponent = ({ firebaseApp }) => {
             });
             const responseJson = await response.json();
             let fees = responseJson?.result?.priorityFeeLevels?.high ?? 0;
-            console.log(`HIGH priority fee: ${fees} lamports`);
 
             fees *= 1;
             console.log("Assembling transaction...");
@@ -108,7 +106,6 @@ const BurnTokenComponent = ({ firebaseApp }) => {
             transaction.recentBlockhash = blockhash;
             transaction.feePayer = publicKey;
             transaction.setSigners(publicKey); // Set the signer
-            console.log("Priority fee payer:", publicKey.toString());
             console.log("Signing transaction...");
             // Sign transaction
             const signedTransaction = await signTransaction(transaction);
