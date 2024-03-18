@@ -181,7 +181,7 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                     )}
                 </div>
                 <div className="mt-4">
-                    <Leaderboard firebaseApp={firebaseApp} /> {/* Include Leaderboard component */}
+                    <Leaderboard firebaseApp={firebaseApp} refreshLeaderboard={() => {}} /> {/* Include Leaderboard component */}
                 </div>
             </div>
         </div>
