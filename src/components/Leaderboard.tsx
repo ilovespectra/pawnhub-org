@@ -55,7 +55,7 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
                 {leaderboardData.map(([signer, quantity], index) => (
                     <div key={signer} className="border border-gray-200 p-2 rounded-md bg-purple-900" style={{ width: '50vh', height: 'auto' }}>
                         <div className="font-bold text-lg text-purple-600">
-                            {index + 1}. ♟️<span style={{ color: 'white' }}>{quantity}</span>
+                            {index + 1}. ♟️<span style={{ color: 'white' }}>{quantity.toLocaleString()}</span>
                         </div>
                         <div className="text-sm">{truncateSigner(signer)}</div>
                     </div>
@@ -64,7 +64,7 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
             <p className="mt-10"><i>Not showing up?</i></p>
             <p><i>DM @tanny.sol your tx sig on twitter</i></p>
         </div>
-    );
+    );    
 };
 
 // Function to truncate signer pubkey if it's too long

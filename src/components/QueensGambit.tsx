@@ -48,8 +48,16 @@ const BurnTokenComponent = ({ firebaseApp }) => {
     };
     const [burnQuantity, setBurnQuantity] = useState(""); 
     const handleQuantityChange = (event) => {
-        setBurnQuantity(event.target.value);
-      };
+        const value = event.target.value;
+        // Remove any non-digit characters
+        const newValue = value.replace(/[^\d]/g, '');
+        // Format the value with commas
+        const formattedValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        // Update the state with the formatted value
+        setBurnQuantity(formattedValue);
+    };
+    
+    
 
     const handleClick = async () => {
         setIsLoading(true);
@@ -63,7 +71,7 @@ const BurnTokenComponent = ({ firebaseApp }) => {
             const QUICKNODE_RPC = process.env.NEXT_PUBLIC_RPC_URL;
             const MINT_ADDRESS = TOKEN_PROGRAM_ID.toBase58();
             const MINT_DECIMALS = 5;
-            const BURN_QUANTITY_PAWN = parseInt(burnQuantity);
+            const BURN_QUANTITY_PAWN = parseInt(burnQuantity.replace(/,/g, ''));
             const BURN_QUANTITY_LAMPORTS = BURN_QUANTITY_PAWN * Math.pow(10, MINT_DECIMALS);
     
             // Fetch associated token account address
@@ -172,7 +180,7 @@ const BurnTokenComponent = ({ firebaseApp }) => {
         <div className="hero-content bg-black rounded-2xl text-center p-4 w-4/5 max-w-screen-lg mx-auto" style={{ width: '800px', marginLeft: '50px', marginRight: '50px' }} >
             <div className="flex flex-col items-center justify-center">
                 <div>
-                <div style={{ width: '300px', height: 'auto' }} />
+                    <div style={{ width: '300px', height: 'auto' }} />
                     {isLoading ? (
                         <div className="flex flex-col items-center justify-center">
                             <img src="/burningpawn.gif" alt="Loading..." style={{ width: '300px', height: 'auto' }} />
@@ -197,7 +205,7 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                 </div>
                 <div>
       <input
-        type="number"
+        type="text"
         value={burnQuantity}
         onChange={handleQuantityChange}
         placeholder="Enter quantity to burn"
