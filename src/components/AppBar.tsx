@@ -14,11 +14,16 @@ export const AppBar = ({ setSelectedPriority }) => { // Destructuring setSelecte
     setDropdownOpen(!dropdownOpen);
   };
 
-  // Function to handle the priority change
   const handlePriorityChange = (priority) => {
-    setSelectedPriority(priority);
+    if (priority === "None") {
+        setSelectedPriority(null); // Set selectedPriority to null when "None" is selected
+    } else {
+        setSelectedPriority(priority);
+    }
     setDropdownOpen(false); // Close the dropdown after selecting an option
-  };
+};
+
+  
 
   return (
     <div>
@@ -58,15 +63,16 @@ export const AppBar = ({ setSelectedPriority }) => { // Destructuring setSelecte
           <div className={`dropdown dropdown-end bg-black ${dropdownOpen ? 'open' : ''}`}>
             <button className="btn btn-ghost btn-square" onClick={toggleDropdownAndPriorityChange}>Priority</button>
             <ul className="shadow menu dropdown-content bg-black rounded-box text-neutral-content">
-              <li>
-                <select onChange={(e) => handlePriorityChange(e.target.value)} className="dropdown-select bg-black">
-                  <option value="min">Minimum</option>
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                  <option value="veryHigh">Very High</option>
-                </select>
-              </li>
+            <li>
+              <select onChange={(e) => handlePriorityChange(e.target.value)} className="dropdown-select bg-black">
+                <option value="none">None</option>
+                <option value="min">Minimum</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="veryHigh">Very High</option>
+              </select>
+            </li>
             </ul>
           </div>
 

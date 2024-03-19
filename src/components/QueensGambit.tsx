@@ -56,8 +56,6 @@ const BurnTokenComponent = ({ firebaseApp }) => {
         // Update the state with the formatted value
         setBurnQuantity(formattedValue);
     };
-    
-    
 
     const handleClick = async () => {
         setIsLoading(true);
@@ -204,14 +202,19 @@ const BurnTokenComponent = ({ firebaseApp }) => {
                     )}
                 </div>
                 <div>
-      <input
-        type="text"
-        value={burnQuantity}
-        onChange={handleQuantityChange}
-        placeholder="Enter quantity to burn"
-        className="bg-gray-800 text-white p-2 rounded-md outline-none mt-5"
-      />
-    </div>
+                <input
+                    type="text"
+                    value={burnQuantity}
+                    onChange={handleQuantityChange}
+                    placeholder="Enter quantity to burn"
+                    className="bg-gray-800 text-white p-2 rounded-md outline-none mt-5"
+                />
+                </div>
+                {burnResult && burnResult.success && (
+                                <div className="mt-4">
+                                    <a href={`https://xray.helius.xyz/tx/${burnResult.txid}`} target="_blank" rel="noopener noreferrer" className="text-green-500 underline hover:text-green-700">View On XRAY</a>
+                                </div>
+                            )}
                 <div className="mt-4">
                     <Leaderboard firebaseApp={firebaseApp} refreshLeaderboard={() => {}} /> {/* Include Leaderboard component */}
                 </div>
