@@ -61,6 +61,8 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
                     </div>
                 ))}
             </div>
+            <p className="mt-10"><i>Not showing up?</i></p>
+            <p><i>DM @tanny.sol your tx sig on twitter</i></p>
         </div>
     );
 };

@@ -1,42 +1,49 @@
-import { FC } from 'react';
+import React, { useState } from 'react';
 import Link from "next/link";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useAutoConnect } from '../contexts/AutoConnectProvider';
 import NetworkSwitcher from './NetworkSwitcher';
 import AirdropChecker from 'pages/checkmate';
 
-export const AppBar: FC = props => {
+export const AppBar = ({ setSelectedPriority }) => { // Destructuring setSelectedPriority from props
   const { autoConnect, setAutoConnect } = useAutoConnect();
+  const [dropdownOpen, setDropdownOpen] = useState(false); // State to manage dropdown visibility
+
+  // Function to toggle the dropdown visibility and handle priority change
+  const toggleDropdownAndPriorityChange = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  // Function to handle the priority change
+  const handlePriorityChange = (priority) => {
+    setSelectedPriority(priority);
+    setDropdownOpen(false); // Close the dropdown after selecting an option
+  };
 
   return (
     <div>
-
       {/* NavBar / Header */}
       <div className="navbar flex flex-row md:mb-2 shadow-lg bg-black text-neutral-content">
         <div className="navbar-start">
-        <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
-
-          <svg className="inline-block w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+          <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
+            <svg className="inline-block w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
           </label>
           <div className="hidden sm:inline w-22 h-22 md:p-2">
-          <img src="/pawnhub-banner.png" alt="PawnHub Banner" style={{ width: '50%', height: 'auto' }}/>
+            <img src="/pawnhub-banner.png" alt="PawnHub Banner" style={{ width: '50%', height: 'auto' }}/>
           </div>
         </div>
 
         {/* Nav Links */}
         <div className="hidden md:inline md:navbar-center">
           <div className="flex items-stretch">
-          <Link href="/">
+            <Link href="/">
               <a className="btn btn-ghost btn-sm rounded-btn">Home</a>
             </Link>
-          <Link href="/about">
+            <Link href="/about">
               <a className="btn btn-ghost btn-sm rounded-btn">About</a>
             </Link>
-            {/* <Link href="/checkmate">
-              <a className="btn btn-ghost btn-sm rounded-btn">Check Mate</a>
-            </Link> */}
             <Link href="/queensgambit">
               <a className="btn btn-ghost btn-sm rounded-btn">Queen&apos;s Gambit</a>
             </Link>
@@ -46,6 +53,22 @@ export const AppBar: FC = props => {
         {/* Wallet & Settings */}
         <div className="navbar-end">
           <WalletMultiButton className="btn btn-ghost mr-4" />
+
+          {/* Dropdown menu for priority fee tier selection */}
+          <div className={`dropdown dropdown-end bg-black ${dropdownOpen ? 'open' : ''}`}>
+            <button className="btn btn-ghost btn-square" onClick={toggleDropdownAndPriorityChange}>Priority</button>
+            <ul className="shadow menu dropdown-content bg-black rounded-box text-neutral-content">
+              <li>
+                <select onChange={(e) => handlePriorityChange(e.target.value)} className="dropdown-select bg-black">
+                  <option value="min">Minimum</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="veryHigh">Very High</option>
+                </select>
+              </li>
+            </ul>
+          </div>
 
           <div className="dropdown dropdown-end">
             <div tabIndex={0} className="btn btn-square btn-ghost text-right">
@@ -61,7 +84,6 @@ export const AppBar: FC = props => {
                     <a>Autoconnect</a>
                     <input type="checkbox" checked={autoConnect} onChange={(e) => setAutoConnect(e.target.checked)} className="toggle" />
                   </label>
-
                   <NetworkSwitcher />
                 </div>
               </li>
@@ -69,7 +91,6 @@ export const AppBar: FC = props => {
           </div>
         </div>
       </div>
-      {props.children}
     </div>
   );
 };
