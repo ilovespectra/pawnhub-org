@@ -178,25 +178,25 @@ const BurnTokenComponent = ({ firebaseApp }) => {
         <div className="hero-content bg-black rounded-2xl text-center p-4 w-4/5 max-w-screen-lg mx-auto" style={{ width: '800px', marginLeft: '50px', marginRight: '50px' }} >
             <div className="flex flex-col items-center justify-center">
                 <div>
-                    <div style={{ width: '300px', height: 'auto' }} />
+                    <div style={{ width: '270px', height: 'auto' }} />
                     {isLoading ? (
                         <div className="flex flex-col items-center justify-center">
-                            <img src="/burningpawn.gif" alt="Loading..." style={{ width: '300px', height: 'auto' }} />
+                            <img src="/burningpawn.gif" alt="Loading..." style={{ width: '270px', height: 'auto' }} />
                         </div>
                     ) : (
                         <>
                             {publicKey ? (
                                 burnResult ? (
                                     burnResult.success ? (
-                                        <img src="/repeat2.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '300px', height: 'auto' }} />
+                                        <img src="/repeat2.gif" alt="Reload" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '270px', height: 'auto' }} />
                                     ) : (
-                                        <img src="/failedretry.gif" alt="Failed retry" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '300px', height: 'auto' }} />
+                                        <img src="/failedretry.gif" alt="Failed retry" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={reloadPage} style={{ width: '270px', height: 'auto' }} />
                                     )
                                 ) : (
-                                    <img src="/burnpawn.gif" alt="Sacrifice PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '300px', height: 'auto' }} />
+                                    <img src="/burnpawn.gif" alt="Sacrifice PAWN" className="w-12 h-12 cursor-pointer transform transition-transform duration-150 hover:scale-95" onClick={handleClick} style={{ width: '270px', height: 'auto' }} />
                                 )
                             ) : (
-                                <img src="/connect2.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '300px', height: 'auto' }} />
+                                <img src="/connect2.gif" alt="Connect to Burn" className="w-12 h-12 cursor-pointer" style={{ width: '270px', height: 'auto' }} />
                             )}
                         </>
                     )}
