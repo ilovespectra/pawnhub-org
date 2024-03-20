@@ -52,12 +52,12 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
 
     return (
         <div className="leaderboard mt-8 w-full max-w-screen-lg mx-auto">
-            <div className="text-center mb-4">
-                <img src="masters.png" alt="Masters" className="mx-auto" style={{ width: '50vh', height: 'auto' }}/>
-            </div>
             <div className="total-sacrificed mb-4 p-4 border border-white rounded-md bg-black">
                 <p>TOTAL  ♟️ BURNED:</p>
                 <h3 className="font-bold text-xl text-white">{totalPawnSacrificed.toLocaleString()}</h3>
+            </div>
+            <div className="text-center mb-4">
+                <img src="masters.png" alt="Masters" className="mx-auto" style={{ width: '50vh', height: 'auto' }}/>
             </div>
             <div className="grid grid-cols-1 gap-4">
                 {leaderboardData.map(([signer, quantity], index) => (
