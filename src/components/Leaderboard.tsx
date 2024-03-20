@@ -5,6 +5,7 @@ import { initializeApp } from 'firebase/app';
 const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
     const [leaderboardData, setLeaderboardData] = useState([]);
     const [burnSuccess, setBurnSuccess] = useState(false);
+    const [totalPawnSacrificed, setTotalPawnSacrificed] = useState(0);
 
     useEffect(() => {
         const fetchLeaderboardData = async () => {
@@ -15,11 +16,13 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
 
                 const snapshot = await getDocs(burnsQuery);
                 const leaderboardMap = new Map();
+                let totalQuantity = 0; // Initialize total quantity
 
                 snapshot.forEach((doc) => {
                     const data = doc.data();
                     const { signer, quantity } = data;
 
+                    totalQuantity += quantity; // Add quantity to total
                     if (leaderboardMap.has(signer)) {
                         leaderboardMap.set(signer, leaderboardMap.get(signer) + quantity);
                     } else {
@@ -27,6 +30,7 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
                     }
                 });
 
+                setTotalPawnSacrificed(totalQuantity); // Set total quantity
                 const sortedLeaderboardData = Array.from(leaderboardMap.entries())
                     .sort((a, b) => b[1] - a[1]); // Sort in descending order
 
@@ -50,6 +54,9 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
         <div className="leaderboard mt-8 w-full max-w-screen-lg mx-auto">
             <div className="text-center mb-4">
                 <img src="masters.png" alt="Masters" className="mx-auto" style={{ width: '50vh', height: 'auto' }}/>
+            </div>
+            <div className="total-sacrificed mb-4 p-4 border border-white rounded-md bg-black">
+                <h3 className="font-bold text-xl text-red-800">♟️{totalPawnSacrificed.toLocaleString()} sacrificed</h3>
             </div>
             <div className="grid grid-cols-1 gap-4">
                 {leaderboardData.map(([signer, quantity], index) => (
