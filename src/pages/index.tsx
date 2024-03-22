@@ -11,18 +11,18 @@ interface Video {
 }
 
 const videos: Video[] = [
-  { id: '12', title: 'War Never Changes', thumbnailUrl: 'video12-thumbnail.jpg', likes: 100, views: 69 },
-  { id: '11', title: 'Are you a Believer?', thumbnailUrl: 'video11-thumbnail.jpg', likes: 100, views: 69 },
-  { id: '10', title: 'Pawn Did it First', thumbnailUrl: 'video10-thumbnail.jpg', likes: 100, views: 69 },
-  { id: '1', title: 'Pool Boi', thumbnailUrl: 'video1-thumbnail.jpg', likes: 69, views: 420 },
-  { id: '2', title: 'Off Button', thumbnailUrl: 'video2-thumbnail.jpg', likes: 69, views: 269 },
-  { id: '3', title: 'Bet', thumbnailUrl: 'video3-thumbnail.jpg', likes: 69, views: 420 },
-  { id: '4', title: 'The Big Day', thumbnailUrl: 'video4-thumbnail.jpg', likes: 69, views: 420 },
-  { id: '5', title: 'Kill Switch', thumbnailUrl: 'video5-thumbnail.jpg', likes: 69, views: 269 },
-  { id: '6', title: 'Valentines Day', thumbnailUrl: 'video6-thumbnail.jpg', likes: 69, views: 420 },
-  { id: '7', title: 'Thoon', thumbnailUrl: 'video7-thumbnail.jpg', likes: 69, views: 420 },
-  { id: '8', title: 'Comeback Kid', thumbnailUrl: 'video8-thumbnail.jpg', likes: 69, views: 269 },
-  { id: '9', title: 'Airdrop Day', thumbnailUrl: 'video9-thumbnail.jpg', likes: 69, views: 420 },
+  { id: '5', title: 'Kill Switch', thumbnailUrl: 'video5-thumbnail.jpg', likes: 100, views: 269000 },
+  { id: '1', title: 'Pool Boi', thumbnailUrl: 'video1-thumbnail.jpg', likes: 100, views: 420000 },
+  { id: '3', title: 'Bet', thumbnailUrl: 'video3-thumbnail.jpg', likes: 100, views: 420000 },
+  { id: '4', title: 'The Big Day', thumbnailUrl: 'video4-thumbnail.jpg', likes: 100, views: 420000 },
+  { id: '11', title: 'Are you a Believer?', thumbnailUrl: 'video11-thumbnail.jpg', likes: 100, views: 69000 },
+  { id: '10', title: 'Pawn Did it First', thumbnailUrl: 'video10-thumbnail.jpg', likes: 100, views: 69000 },
+  { id: '2', title: 'Off Button', thumbnailUrl: 'video2-thumbnail.jpg', likes: 100, views: 26000 },
+  { id: '7', title: 'Thoon', thumbnailUrl: 'video7-thumbnail.jpg', likes: 100, views: 420000 },
+  { id: '8', title: 'Comeback Kid', thumbnailUrl: 'video8-thumbnail.jpg', likes: 100, views: 269000 },
+  { id: '9', title: 'Airdrop Day', thumbnailUrl: 'video9-thumbnail.jpg', likes: 100, views: 420000 },
+  { id: '6', title: 'Valentines Day', thumbnailUrl: 'video6-thumbnail.jpg', likes: 100, views: 420000 },
+  { id: '12', title: 'War Never Changes', thumbnailUrl: 'video12-thumbnail.jpg', likes: 100, views: 69000 },
 ];
 
 const adImages = ['/ad1.png', '/ad3.png', '/ad6.png', '/ad10.png', '/ad11.png', '/ad12.png', '/ad13.png'];
@@ -63,7 +63,7 @@ const VideoLandingPage: React.FC = () => {
                   </div>
                   <div className="views">
                     <FontAwesomeIcon icon={faEye} />
-                    <span>{video.views} views</span>
+                    <span>{video.views.toLocaleString()} views</span>
                   </div>
                 </div>
               </div>
