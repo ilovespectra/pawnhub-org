@@ -49,9 +49,9 @@ export const AppBar = ({ setSelectedPriority }) => { // Destructuring setSelecte
             <Link href="/about">
               <a className="btn btn-ghost btn-sm rounded-btn">About</a>
             </Link>
-            <Link href="/queensgambit">
+            {/* <Link href="/queensgambit">
               <a className="btn btn-ghost btn-sm rounded-btn">Queen&apos;s Gambit</a>
-            </Link>
+            </Link> */}
           </div>
         </div>
 
