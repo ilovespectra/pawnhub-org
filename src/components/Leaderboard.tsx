@@ -65,7 +65,7 @@ const Leaderboard = ({ firebaseApp, refreshLeaderboard }) => {
                         <div className="font-bold text-lg text-purple-600">
                             {index + 1}. ♟️<span style={{ color: 'white' }}>{quantity.toLocaleString()}</span>
                         </div>
-                        <div className="text-sm">{(signer)}</div>
+                        <div className="text-sm">{truncateSigner(signer)}</div>
                     </div>
                 ))}
             </div>
